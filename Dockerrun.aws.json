@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "tomd1991/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "tomd1991/multi-server",
+      "hostname": "api",
+      "essential":false
+    },
+    {
+      "name": "worker",
+      "image": "tomd1991/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "tomd1991/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 90
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
